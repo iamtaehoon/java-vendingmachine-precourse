@@ -37,4 +37,8 @@ public class StringUtils {
         }
         return eachProductInfo.substring(1, eachProductInfo.length() - 2);
     }
+
+    public static String[] splitProductInfo(String productInfo) {
+        return productInfo.split(",", -1);
+    }
 }

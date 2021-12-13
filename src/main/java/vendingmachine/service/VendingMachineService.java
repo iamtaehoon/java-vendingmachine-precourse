@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Price;
+import vendingmachine.domain.Product;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.util.StringUtils;
@@ -32,7 +33,8 @@ public class VendingMachineService {
         // 2. 이름, 가격, 수량을 Product에 넣어본다. -> 이름 중복은 repository에서 테스트. / 물건 가격 -> 금액 조건 + 100원 이상이어야 된다 추가.
         // 3. 이상 없으면 예쁘게 만들어준걸 repository로 옮긴다.
         for (String eachProductInfo : everyProductInfo) {
-            StringUtils.removeBracket(eachProductInfo);
+            eachProductInfo = StringUtils.removeBracket(eachProductInfo);
+            Product product = new Product(eachProductInfo);
         }
 
     }
