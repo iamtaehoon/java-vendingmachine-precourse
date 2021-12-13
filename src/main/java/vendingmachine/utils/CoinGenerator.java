@@ -1,17 +1,34 @@
 package vendingmachine.utils;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Price;
 
 public class CoinGenerator {
+    static LinkedHashMap<Coin, Integer> temp = new LinkedHashMap<>();
+
     public static LinkedHashMap<Coin, Integer> makeCoins(Price price) {
-        // 랜덤하게 동전을 하나 고른다.
-        // ( 해당 동전의 가치 < price ) 면, price를 빼준다.
-        // 그러고 동전을 저장소에 넣어준다.
-        // 0이 될 때까지 반복한다.
-        // 되고 나면 임시 저장소를 반환한다.
-        return null;
+        int totalMoney = price.getValue();
+        System.out.println(totalMoney);
+        initialize(temp);
+
+        while (totalMoney > 0) {
+            int selectedCoinValue = Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10));
+            System.out.println(selectedCoinValue);
+            Coin selectedCoin = Coin.valueOf(selectedCoinValue);
+            if (selectedCoinValue <= totalMoney) {
+                totalMoney -= selectedCoinValue;
+                temp.put(selectedCoin, temp.get(selectedCoin) + 1);
+            }
+        }
+        return temp;
+    }
+
+    private static void initialize(LinkedHashMap<Coin, Integer> temp) {
+        temp.clear();
+        Arrays.stream(Coin.values()).forEach(coin -> temp.put(coin, 0));
     }
 }
