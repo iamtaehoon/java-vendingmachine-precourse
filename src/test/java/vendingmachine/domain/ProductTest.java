@@ -47,11 +47,11 @@ class ProductTest {
     @DisplayName("상품 가격이 숫자가 아닌 경우 예외를 발생시킨다.")
     void 상품_가격_숫자_아님_예외() {
         assertThatThrownBy(() ->  new Product("콜라,a,10")).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("숫자를 입력해 주세요.");
+            .hasMessageContaining("0 이상의 숫자를 입력해 주세요.");
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"콜라,1,1", "콜라,101,0", "스프라이트,1024,10", "트코콜라,6089,100", "콜라,10003,13", "사,1008,84"})
+    @ValueSource(strings = {"콜라,101,1", "콜라,101,0", "스프라이트,1024,10", "트코콜라,6089,100", "콜라,10003,13", "사,1008,84"})
     @DisplayName("상품의 가격이 동전 최소단위로 나누어떨어지지 않으면 예외를 발생시킨다.")
     void 가격_10으로_나누어떨어지지_않음_예외(String input) {
         assertThatThrownBy(() -> new Product(input)).isInstanceOf(IllegalArgumentException.class)
@@ -62,8 +62,7 @@ class ProductTest {
     @ValueSource(strings = {"콜라,0,1", "콜라,-1,0", "스프라이트,-2,10", "트코콜라,-100,100", "콜라,-9487,13", "사,-1461,84"})
     @DisplayName("상품 가격이 0이거나, 음수면 예외를 발생시킨다.")
     void 가격_0보다_작거나_같음_예외(String input) {
-        assertThatThrownBy(() ->  new Product(input)).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("상품의 가격은 0 보다 커야 합니다.");
+        assertThatThrownBy(() ->  new Product(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -86,7 +85,7 @@ class ProductTest {
     @DisplayName("상품 수량이 숫자가 아닌 경우 예외를 발생시킨다.")
     void 상품_가격_수량_아님_예외() {
         assertThatThrownBy(() -> new Product("콜라,1000,1bs")).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("숫자를 입력해 주세요.");
+            .hasMessageContaining("0 이상의 숫자를 입력해 주세요.");
     }
 
     @ParameterizedTest
@@ -94,7 +93,7 @@ class ProductTest {
     @DisplayName("상품 수량이 0보다 작으면 예외를 발생시킨다.")
     void 수량_0보다_작으면_예외(String input) {
         assertThatThrownBy(() -> new Product(input)).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("상품의 수량은 음수가 될 수 없습니다.");
+            .hasMessageContaining("0 이상의 숫자를 입력해 주세요.");
     }
 
     @ParameterizedTest
@@ -102,6 +101,6 @@ class ProductTest {
     @DisplayName("상품 수량이 100개를 초과하면 예외를 발생시킨다.")
     void 수량_100개_초과_예외(String input) {
         assertThatThrownBy(() -> new Product(input)).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("상품의 수량은 100보다 클 수 없습니다.");
+            .hasMessageContaining("상품의 수량은 100개를 넘을 수 없습니다.");
     }
 }

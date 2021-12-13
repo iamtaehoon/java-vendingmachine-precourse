@@ -19,8 +19,14 @@ public class Product {
         // 3. 금액을 검사한다.
         Price price = validatePrice(params.get(PRODUCT_PRICE_CNT));
         // 4. 개수를 검사한다.
-        // validateQuantity(params.get(PRODUCT_QUANTITY_CNT));
+        Quantity quantity = validateQuantity(params.get(PRODUCT_QUANTITY_CNT));
 
+    }
+
+    private Quantity validateQuantity(String quantityInput) {
+        quantityInput = validateItIsEmpty(quantityInput);
+        int quantity = StringUtils.convertStringToInt(quantityInput);
+        return new Quantity(quantity);
     }
 
     private Price validatePrice(String priceInput) {
