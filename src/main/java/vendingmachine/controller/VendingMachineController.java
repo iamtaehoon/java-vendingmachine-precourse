@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import java.util.ArrayList;
+
 import vendingmachine.domain.Price;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.util.StringUtils;
@@ -14,6 +16,19 @@ public class VendingMachineController {
 
     public void run() {
         putMoneyInVendingMachine();
+        putProductsInVendingMachine();
+    }
+
+    private void putProductsInVendingMachine() {
+        try {
+            ArrayList<String> everyProductInfo = StringUtils.splitProducts(InputView.putProductsInVendingMachine());
+            vendingMachineService.putProducts(everyProductInfo);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            putProductsInVendingMachine();
+        }
+
+
     }
 
     private void putMoneyInVendingMachine() {

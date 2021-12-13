@@ -10,4 +10,9 @@ public class InputView {
         System.out.println(PUT_MONEY_IN_VENDING_MACHINE_MESSAGE);
         return Console.readLine();
     }
+
+    public static String putProductsInVendingMachine() {
+        System.out.println(PUT_PRODUCTS_IN_VENDING_MACHINE_MESSAGE);
+        return Console.readLine();
+    }
 }
