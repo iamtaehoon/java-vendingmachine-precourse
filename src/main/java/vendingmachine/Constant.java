@@ -10,6 +10,8 @@ public abstract class Constant {
     public static Integer PRODUCT_PRICE_CNT = 1;
     public static Integer PRODUCT_QUANTITY_CNT = 2;
 
+    public static Integer QUANTITY_MAX_VALUE = 100;
+    public static Integer QUANTITY_MIN_VALUE = 0;
     public static String PRODUCT_DELIMETER = ";";
 
 }
