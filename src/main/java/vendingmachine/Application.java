@@ -11,5 +11,6 @@ public class Application {
         ProductRepository productRepository = new ProductRepository();
         VendingMachineService vendingMachineService = new VendingMachineService(coinRepository, productRepository);
         VendingMachineController vendingMachineController = new VendingMachineController(vendingMachineService);
+        vendingMachineController.run();
     }
 }
