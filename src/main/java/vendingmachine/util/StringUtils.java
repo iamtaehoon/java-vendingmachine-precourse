@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class StringUtils {
     public static int convertStringToInt(String input) {
+        validateItIsEmpty(input);
         if (!input.matches(CHECK_NUMBER_REGEX)) {
             throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }
@@ -13,11 +14,18 @@ public class StringUtils {
     }
 
     public static ArrayList<String> splitProducts(String input) {
+        validateItIsEmpty(input);
         ArrayList<String> products = new ArrayList<>();
         for (String product : input.split(PRODUCT_DELIMETER, -1)) {
             products.add(product);
         }
         return products;
+    }
+
+    private static void validateItIsEmpty(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("공백은 입력될 수 없습니다.");
+        }
     }
 
     public static String removeBracket(String eachProductInfo) {
