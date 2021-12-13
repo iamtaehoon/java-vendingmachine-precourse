@@ -74,31 +74,34 @@ class ProductTest {
             .hasMessageContaining("상품의 가격이 100원 미만인 값이 있습니다.");
     }
 
-    //수량은 아직 최신화 안시켜줌.
     // 수량 조건 틀린 경우
     @Test
     @DisplayName("상품 수량에 공백이 있을 경우 예외를 발생시킨다.")
     void 상품_수량_공백_예외() {
-        new Product("콜라,1000,");
+        assertThatThrownBy(() -> new Product("콜라,1000,")).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("입력된 정보에 공백이 있습니다.");
     }
 
     @Test
     @DisplayName("상품 수량이 숫자가 아닌 경우 예외를 발생시킨다.")
     void 상품_가격_수량_아님_예외() {
-        new Product("콜라,1000,1bs");
+        assertThatThrownBy(() -> new Product("콜라,1000,1bs")).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("숫자를 입력해 주세요.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"콜라,100,-1", "스프라이트,1000,-10", "트코콜라,1000,-100", "콜라,10000,-13", "사,1000,-84"})
     @DisplayName("상품 수량이 0보다 작으면 예외를 발생시킨다.")
-    void 수량_0보다_작으면_예외() {
-
+    void 수량_0보다_작으면_예외(String input) {
+        assertThatThrownBy(() -> new Product(input)).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("상품의 수량은 음수가 될 수 없습니다.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"콜라,100,101", "콜라,100,231", "스프라이트,1000,101", "트코콜라,1000,998", "콜라,10000,5125"})
     @DisplayName("상품 수량이 100개를 초과하면 예외를 발생시킨다.")
-    void 수량_100개_초과_예외() {
-
+    void 수량_100개_초과_예외(String input) {
+        assertThatThrownBy(() -> new Product(input)).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("상품의 수량은 100보다 클 수 없습니다.");
     }
 }
