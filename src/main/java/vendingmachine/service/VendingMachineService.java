@@ -19,6 +19,7 @@ public class VendingMachineService {
 
     public void makeCoins(Price price) {
         LinkedHashMap<Coin,Integer> coins = CoinGenerator.makeCoins(price);
+        coinRepository.putCoins(coins);
         // price에서 int값을 꺼내준다.
         // 해당 값이 0이 될 때까지 동전을 만든다.
         //
