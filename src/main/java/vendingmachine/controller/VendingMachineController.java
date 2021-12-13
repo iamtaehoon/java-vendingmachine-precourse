@@ -9,11 +9,10 @@ public class VendingMachineController {
     private VendingMachineService vendingMachineService;
 
     public VendingMachineController(VendingMachineService vendingMachineService) {
-
+        this.vendingMachineService = vendingMachineService;
     }
 
     public void run() {
-        // 자판기에서 금액을 입력받는다.
         putMoneyInVendingMachine();
     }
 
@@ -21,6 +20,7 @@ public class VendingMachineController {
         try {
             int inputAccount = StringUtils.convertStringToInt(InputView.putMoneyInVendingMachine());
             Price price = new Price(inputAccount);
+            vendingMachineService.makeCoins(price);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             putMoneyInVendingMachine();
