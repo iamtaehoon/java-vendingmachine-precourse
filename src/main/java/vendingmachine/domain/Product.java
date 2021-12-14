@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import vendingmachine.util.StringUtils;
 
 public class Product {
+    private String name;
+    private Price price;
+    private Quantity quantity;
+
     public Product(String eachProductInfo) {
-        validate(eachProductInfo);
+        initialize(eachProductInfo);
     }
 
-    private void validate(String eachProductInfo) {
-        // 1. 세 개로 나눈다.
+    private void initialize(String eachProductInfo) {
         ArrayList<String> params = validateParamCnt(eachProductInfo);
-        // 2. 이름을 검사한다.
-        String name = validateName(params.get(PRODUCT_NAME_IDX));
-        // 3. 금액을 검사한다.
-        Price price = validatePrice(params.get(PRODUCT_PRICE_CNT));
-        // 4. 개수를 검사한다.
-        Quantity quantity = validateQuantity(params.get(PRODUCT_QUANTITY_CNT));
-
+        this.name = validateName(params.get(PRODUCT_NAME_IDX));
+        this.price = validatePrice(params.get(PRODUCT_PRICE_CNT));
+        this.quantity = validateQuantity(params.get(PRODUCT_QUANTITY_CNT));
     }
+
 
     private Quantity validateQuantity(String quantityInput) {
         quantityInput = validateItIsEmpty(quantityInput);
