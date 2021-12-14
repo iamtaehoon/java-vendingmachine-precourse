@@ -38,6 +38,7 @@ public class VendingMachineService {
             eachProductInfo = StringUtils.removeBracket(eachProductInfo);
             Product product = new Product(eachProductInfo);
             validateOverlapProduct(temp, product);
+            validateOverlapProduct(temp, product);
             temp.put(product.getName(), product);
         }
         validateEvenOneProduct(temp);

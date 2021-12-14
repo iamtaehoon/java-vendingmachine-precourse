@@ -52,7 +52,6 @@ public class Product {
 
     private String validateItIsEmpty(String name) {
         name = name.trim();
-        System.out.println(name);
         if (name.isEmpty()) {
             throw new IllegalArgumentException("입력된 정보에 공백이 있습니다.");
         }
