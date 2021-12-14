@@ -15,6 +15,7 @@ import vendingmachine.utils.CoinGenerator;
 public class VendingMachineService {
     private CoinRepository coinRepository;
     private ProductRepository productRepository;
+    private Price userInsertAmount;
 
     public VendingMachineService(CoinRepository coinRepository, ProductRepository productRepository) {
         this.coinRepository = coinRepository;
@@ -55,5 +56,10 @@ public class VendingMachineService {
         if (temp.containsKey(product.getName())) {
             throw new IllegalArgumentException("이미 자판기 내에 존재하는 상품을 넣으려 합니다.");
         }
+    }
+
+    public void putMoneyToBuyProduct(Price userInsertAmount) {
+        // TODO 해당 금액으로 살 수 있는 물건이 없으면 -> 예외
+        this.userInsertAmount = userInsertAmount;
     }
 }

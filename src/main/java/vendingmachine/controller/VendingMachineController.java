@@ -23,8 +23,7 @@ public class VendingMachineController {
     private void putMoneyToBuyProduct() {
         try {
             int inputMoney = StringUtils.convertStringToInt(InputView.putMoneyToBuyProduct());
-            Price price = new Price(inputMoney);
-            // vendingMachineService.putMoneyToBuyProduct();
+            vendingMachineService.putMoneyToBuyProduct(new Price(inputMoney));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             putMoneyToBuyProduct();
