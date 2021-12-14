@@ -15,8 +15,21 @@ public class VendingMachineController {
     }
 
     public void run() {
-        putMoneyInVendingMachine();
+        makeChangeInVendingMachine();
         putProductsInVendingMachine();
+        putMoneyToBuyProduct();
+    }
+
+    private void putMoneyToBuyProduct() {
+        try {
+            int inputMoney = StringUtils.convertStringToInt(InputView.putMoneyToBuyProduct());
+            Price price = new Price(inputMoney);
+            // vendingMachineService.putMoneyToBuyProduct();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            putMoneyToBuyProduct();
+        }
+
     }
 
     private void putProductsInVendingMachine() {
@@ -27,19 +40,16 @@ public class VendingMachineController {
             System.out.println(e.getMessage());
             putProductsInVendingMachine();
         }
-
-
     }
 
-    private void putMoneyInVendingMachine() {
+    private void makeChangeInVendingMachine() {
         try {
-            int inputAccount = StringUtils.convertStringToInt(InputView.putMoneyInVendingMachine());
+            int inputAccount = StringUtils.convertStringToInt(InputView.putMoneyInVendingMachineByAdmin());
             Price price = new Price(inputAccount);
             vendingMachineService.makeCoins(price);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            putMoneyInVendingMachine();
+            makeChangeInVendingMachine();
         }
-
     }
 }

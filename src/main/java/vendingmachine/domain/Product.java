@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.Constant.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import vendingmachine.util.StringUtils;
 
@@ -63,6 +64,9 @@ public class Product {
         String[] productInfo = StringUtils.splitProductInfo(eachProductInfo);
         if (productInfo.length != PRODUCT_INFO_CNT) {
             throw new IllegalArgumentException("상품의 정보가 제대로 입력되지 않았습니다.");
+        }
+        for (String detail : productInfo) {
+            temp.add(detail);
         }
         return temp;
     }
