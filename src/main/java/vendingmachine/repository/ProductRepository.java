@@ -21,16 +21,29 @@ public class ProductRepository {
 
     public Price checkCanPurchase(String productName, Price userInsertAmount) {
         Product product = checkProductExist(productName);
-        checkHaveSufficientAmount(userInsertAmount, product);
+        checkHaveSufficientAmount(userInsertAmount, product.getPriceValue());
         checkProductHaveStock(productName);
         product.decreaseStock();
-        return userInsertAmount.decreaseAmount();
+        return userInsertAmount.decreaseAmount(product.getPriceValue());
     }
 
-    private void checkHaveSufficientAmount(Price userInsertAmount, Product product) {
-        if (product.getPriceValue() > userInsertAmount.getValue()) {
-            // 남아있는 userInputMoney로 구매 가능한지 확인한다.
-            throw new IllegalArgumentException();
+    private void checkProductHaveStock(String productName) {
+        Product product = productRepository.get(productName);
+        if (product.getQuantityValue() <= 0) {
+            throw new IllegalArgumentException("해당 상품은 재고가 존재하지 않습니다.");
+        }
+    }
+
+    private Product checkProductExist(String productName) {
+        if (!productRepository.containsKey(productName)) {
+            throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
+        }
+        return productRepository.get(productName);
+    }
+
+    private void checkHaveSufficientAmount(Price userInsertAmount, int productPrice) {
+        if (productPrice > userInsertAmount.getValue()) {
+            throw new IllegalArgumentException("남아있는 금액으로 해당 제품을 구매할 수 없습니다.");
         }
     }
 }

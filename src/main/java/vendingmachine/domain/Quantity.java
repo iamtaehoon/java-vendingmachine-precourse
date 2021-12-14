@@ -31,4 +31,10 @@ public class Quantity {
         return value;
     }
 
+    public void decrease() {
+        if (value <= 0) {
+            throw new IllegalArgumentException("상품의 수량은 0보다 작을 수 없습니다.");
+        }
+        this.value -= 1;
+    }
 }

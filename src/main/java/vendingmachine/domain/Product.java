@@ -81,4 +81,8 @@ public class Product {
     public int getQuantityValue() {
         return quantity.getValue();
     }
+
+    public void decreaseStock() {
+        this.quantity.decrease();
+    }
 }

@@ -30,4 +30,12 @@ public class Price {
     public int getValue() {
         return value;
     }
+
+    public Price decreaseAmount(int usedAmount) {
+        if (value < usedAmount) {
+            throw new IllegalArgumentException("해당 금액만큼 존재하지 않습니다.");
+        }
+        this.value -= usedAmount;
+        return this;
+    }
 }
