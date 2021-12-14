@@ -20,4 +20,9 @@ public class InputView {
         System.out.println(PUT_MONEY_TO_BUY_PRODUCT_MESSAGE);
         return Console.readLine().trim();
     }
+
+    public static String putProductToPurchase() {
+        System.out.println(ENTER_PRODUCT_PURCHASE_MESSAGE);
+        return Console.readLine().trim();
+    }
 }

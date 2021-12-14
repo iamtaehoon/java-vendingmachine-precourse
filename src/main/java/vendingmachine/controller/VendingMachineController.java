@@ -25,12 +25,12 @@ public class VendingMachineController {
 
     private void buyProductsUntilEnd() {
         while (returnCode == ReturnCode.CONTINUE) {
-            butProduct();
+            buyProduct();
         }
     }
 
-    private void butProduct() {
-        System.out.println("무한반복.");
+    private void buyProduct() {
+        InputView.putProductToPurchase();
     }
 
     private void putMoneyToBuyProduct() {
