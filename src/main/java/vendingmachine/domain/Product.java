@@ -73,11 +73,11 @@ public class Product {
         return name;
     }
 
-    public Price getPrice() {
-        return price;
+    public int getPriceValue() {
+        return price.getValue();
     }
 
-    public Quantity getQuantity() {
-        return quantity;
+    public int getQuantityValue() {
+        return quantity.getValue();
     }
 }
