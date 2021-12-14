@@ -27,24 +27,25 @@ public class VendingMachineService {
     }
 
     public void putProducts(ArrayList<String> everyProductInfo) {
-        // 아무 상품도 들어오지 않으면 예외를 터트린다.
+        HashMap<String, Product> products = makeInputToProduct(everyProductInfo);
+        productRepository.add(products);
 
-        //검증하고 레포지토리로.
-        // 1. []로 감싸져있는지 확인하고, 전부 제거해준다.
-        // 2. 이름, 가격, 수량을 Product에 넣어본다. -> 이름 중복은 repository에서 테스트. / 물건 가격 -> 금액 조건 + 100원 이상이어야 된다 추가.
-        // 3. 이상 없으면 예쁘게 만들어준걸 repository로 옮긴다.
-        // productRepo [상품명, 상품] -> HashMap()
+    }
+
+    private HashMap<String, Product> makeInputToProduct(ArrayList<String> everyProductInfo) {
         HashMap<String, Product> temp = new HashMap<>();
         for (String eachProductInfo : everyProductInfo) {
             eachProductInfo = StringUtils.removeBracket(eachProductInfo);
             Product product = new Product(eachProductInfo);
-            // product.getName()을 키로 갖는 값이 temp에 존재하면 -> 에러.
-            if (temp.containsKey(product.getName())) {
-                throw new IllegalArgumentException("이미 자판기 내에 존재하는 상품을 넣으려 합니다.");
-            }
+            validateOverlapProduct(temp, product);
             temp.put(product.getName(), product);
         }
-        productRepository.add(temp);
+        return temp;
+    }
 
+    private void validateOverlapProduct(HashMap<String, Product> temp, Product product) {
+        if (temp.containsKey(product.getName())) {
+            throw new IllegalArgumentException("이미 자판기 내에 존재하는 상품을 넣으려 합니다.");
+        }
     }
 }
