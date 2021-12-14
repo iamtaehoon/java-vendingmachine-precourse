@@ -30,7 +30,8 @@ public class VendingMachineController {
     }
 
     private void buyProduct() {
-        InputView.putProductToPurchase();
+        String productName = InputView.putProductToPurchase();
+        vendingMachineService.sellProduct(productName);
     }
 
     private void putMoneyToBuyProduct() {

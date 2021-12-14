@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Price;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.ReturnCode;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.util.StringUtils;
@@ -62,5 +63,10 @@ public class VendingMachineService {
         // TODO 해당 금액으로 살 수 있는 물건이 없으면 -> 예외
         this.userInsertAmount = userInsertAmount;
         // TODO: 투입금액: @@원 여기에서 Output 호출.
+    }
+
+    public ReturnCode sellProduct(String productName) {
+        userInsertAmount = productRepository.checkCanPurchase(productName,userInsertAmount);
+        //TODO 리턴코드 반환해줘야함.
     }
 }
