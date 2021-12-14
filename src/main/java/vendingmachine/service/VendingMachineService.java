@@ -12,6 +12,7 @@ import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.util.StringUtils;
 import vendingmachine.utils.CoinGenerator;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineService {
     private CoinRepository coinRepository;
@@ -62,11 +63,13 @@ public class VendingMachineService {
     public void putMoneyToBuyProduct(Price userInsertAmount) {
         // TODO 해당 금액으로 살 수 있는 물건이 없으면 -> 예외
         this.userInsertAmount = userInsertAmount;
-        // TODO: 투입금액: @@원 여기에서 Output 호출.
+        OutputView.showUserInsertAmount(userInsertAmount);
     }
 
     public ReturnCode sellProduct(String productName) {
-        userInsertAmount = productRepository.checkCanPurchase(productName,userInsertAmount);
+        userInsertAmount = productRepository.sellProduct(productName,userInsertAmount);
         //TODO 리턴코드 반환해줘야함.
+        OutputView.showUserInsertAmount(userInsertAmount);
+        return ReturnCode.CONTINUE;
     }
 }

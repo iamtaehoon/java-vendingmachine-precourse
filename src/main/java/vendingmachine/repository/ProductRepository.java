@@ -19,12 +19,17 @@ public class ProductRepository {
         }
     }
 
-    public Price checkCanPurchase(String productName, Price userInsertAmount) {
+    public Price sellProduct(String productName, Price userInsertAmount) {
+        Product product = validateProductCanBuy(productName, userInsertAmount);
+        product.decreaseStock();
+        return userInsertAmount.decreaseAmount(product.getPriceValue());
+    }
+
+    private Product validateProductCanBuy(String productName, Price userInsertAmount) {
         Product product = checkProductExist(productName);
         checkHaveSufficientAmount(userInsertAmount, product.getPriceValue());
         checkProductHaveStock(productName);
-        product.decreaseStock();
-        return userInsertAmount.decreaseAmount(product.getPriceValue());
+        return product;
     }
 
     private void checkProductHaveStock(String productName) {
