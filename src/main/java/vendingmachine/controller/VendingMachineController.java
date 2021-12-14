@@ -32,7 +32,7 @@ public class VendingMachineController {
     private void buyProduct() {
         try {
             String productName = InputView.putProductToPurchase();
-            vendingMachineService.sellProduct(productName);
+            returnCode = vendingMachineService.sellProduct(productName);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             buyProduct();

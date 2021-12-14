@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import vendingmachine.domain.Price;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.ReturnCode;
 
 public class ProductRepository {
     private HashMap<String, Product> productRepository = new HashMap<>();
@@ -50,5 +51,24 @@ public class ProductRepository {
         if (productPrice > userInsertAmount.getValue()) {
             throw new IllegalArgumentException("남아있는 금액으로 해당 제품을 구매할 수 없습니다.");
         }
+    }
+
+    public ReturnCode checkPurchaseIsAvailable(Price userInsertAmount) {
+        //모든 상품의 개수가 0이면 끝
+        boolean isEmptyVendingMachine = productRepository.keySet()
+            .stream()
+            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
+        int moneyUserHave = userInsertAmount.getValue();
+        boolean noProductCanPurchase = productRepository.keySet()
+            .stream()
+            .filter(name -> productRepository.get(name).getPriceValue() <= moneyUserHave)
+            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
+
+        // System.out.println("noProductCanPurchase = " + noProductCanPurchase);
+        // System.out.println("isEmptyVendingMachine = " + isEmptyVendingMachine);
+        // System.out.println(ReturnCode.valueOf(isEmptyVendingMachine || noProductCanPurchase));
+        boolean isReturn = isEmptyVendingMachine || noProductCanPurchase;
+
+        return ReturnCode.valueOf(isReturn);
     }
 }

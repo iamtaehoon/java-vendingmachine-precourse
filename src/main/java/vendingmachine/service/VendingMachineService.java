@@ -68,8 +68,7 @@ public class VendingMachineService {
 
     public ReturnCode sellProduct(String productName) {
         userInsertAmount = productRepository.sellProduct(productName,userInsertAmount);
-        //TODO 리턴코드 반환해줘야함.
         OutputView.showUserInsertAmount(userInsertAmount);
-        return ReturnCode.CONTINUE;
+        return productRepository.checkPurchaseIsAvailable(userInsertAmount);
     }
 }
