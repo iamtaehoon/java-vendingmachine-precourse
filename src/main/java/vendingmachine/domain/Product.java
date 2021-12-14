@@ -68,4 +68,16 @@ public class Product {
         }
         return temp;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
 }
