@@ -17,9 +17,6 @@ public class Product {
 
     private void initialize(String eachProductInfo) {
         ArrayList<String> params = validateParamCnt(eachProductInfo);
-        for (String param : params) {
-            System.out.println("param = " + param);
-        }
         this.name = validateName(params.get(PRODUCT_NAME_IDX));
         this.price = validatePrice(params.get(PRODUCT_PRICE_CNT));
         this.quantity = validateQuantity(params.get(PRODUCT_QUANTITY_CNT));
@@ -53,7 +50,6 @@ public class Product {
     }
 
     private String validateItIsEmpty(String name) {
-        System.out.println("ds"+name);
         name = name.trim();
         System.out.println(name);
         if (name.isEmpty()) {
@@ -63,15 +59,10 @@ public class Product {
     }
 
     private ArrayList<String> validateParamCnt(String eachProductInfo) {
-        System.out.println(eachProductInfo);
         ArrayList<String> temp = new ArrayList<>();
         String[] productInfo = StringUtils.splitProductInfo(eachProductInfo);
         if (productInfo.length != PRODUCT_INFO_CNT) {
             throw new IllegalArgumentException("상품의 정보가 제대로 입력되지 않았습니다.");
-        }
-        for (String detail : productInfo) {
-            System.out.println("detail = " + detail);
-            temp.add(detail);
         }
         return temp;
     }
