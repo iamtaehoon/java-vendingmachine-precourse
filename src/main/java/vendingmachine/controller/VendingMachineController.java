@@ -30,8 +30,13 @@ public class VendingMachineController {
     }
 
     private void buyProduct() {
-        String productName = InputView.putProductToPurchase();
-        vendingMachineService.sellProduct(productName);
+        try {
+            String productName = InputView.putProductToPurchase();
+            vendingMachineService.sellProduct(productName);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            buyProduct();
+        }
     }
 
     private void putMoneyToBuyProduct() {
