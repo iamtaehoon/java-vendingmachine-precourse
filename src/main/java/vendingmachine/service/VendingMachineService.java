@@ -61,5 +61,6 @@ public class VendingMachineService {
     public void putMoneyToBuyProduct(Price userInsertAmount) {
         // TODO 해당 금액으로 살 수 있는 물건이 없으면 -> 예외
         this.userInsertAmount = userInsertAmount;
+        // TODO: 투입금액: @@원 여기에서 Output 호출.
     }
 }

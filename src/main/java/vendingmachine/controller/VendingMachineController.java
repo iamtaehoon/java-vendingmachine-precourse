@@ -3,12 +3,14 @@ package vendingmachine.controller;
 import java.util.ArrayList;
 
 import vendingmachine.domain.Price;
+import vendingmachine.domain.ReturnCode;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.util.StringUtils;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {
     private VendingMachineService vendingMachineService;
+    private ReturnCode returnCode = ReturnCode.CONTINUE;
 
     public VendingMachineController(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
@@ -18,6 +20,17 @@ public class VendingMachineController {
         makeChangeInVendingMachine();
         putProductsInVendingMachine();
         putMoneyToBuyProduct();
+        buyProductsUntilEnd();
+    }
+
+    private void buyProductsUntilEnd() {
+        while (returnCode == ReturnCode.CONTINUE) {
+            butProduct();
+        }
+    }
+
+    private void butProduct() {
+        System.out.println("무한반복.");
     }
 
     private void putMoneyToBuyProduct() {
