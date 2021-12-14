@@ -61,7 +61,9 @@ public class VendingMachineService {
     }
 
     public void putMoneyToBuyProduct(Price userInsertAmount) {
-        // TODO 해당 금액으로 살 수 있는 물건이 없으면 -> 예외
+        if (productRepository.isNoProductCanPurchase(userInsertAmount)) {
+            throw new IllegalArgumentException("투입 금액으로 구매할 수 있는 물건은 없습니다.");
+        }
         this.userInsertAmount = userInsertAmount;
         OutputView.showUserInsertAmount(userInsertAmount);
     }

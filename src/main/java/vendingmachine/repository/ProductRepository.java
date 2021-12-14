@@ -55,14 +55,8 @@ public class ProductRepository {
 
     public ReturnCode checkPurchaseIsAvailable(Price userInsertAmount) {
         //모든 상품의 개수가 0이면 끝
-        boolean isEmptyVendingMachine = productRepository.keySet()
-            .stream()
-            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
-        int moneyUserHave = userInsertAmount.getValue();
-        boolean noProductCanPurchase = productRepository.keySet()
-            .stream()
-            .filter(name -> productRepository.get(name).getPriceValue() <= moneyUserHave)
-            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
+        boolean isEmptyVendingMachine = isEmptyVendingMachine();
+        boolean noProductCanPurchase = isNoProductCanPurchase(userInsertAmount);
 
         // System.out.println("noProductCanPurchase = " + noProductCanPurchase);
         // System.out.println("isEmptyVendingMachine = " + isEmptyVendingMachine);
@@ -70,5 +64,21 @@ public class ProductRepository {
         boolean isReturn = isEmptyVendingMachine || noProductCanPurchase;
 
         return ReturnCode.valueOf(isReturn);
+    }
+
+    public boolean isNoProductCanPurchase(Price userInsertAmount) {
+        int moneyUserHave = userInsertAmount.getValue();
+        boolean noProductCanPurchase = productRepository.keySet()
+            .stream()
+            .filter(name -> productRepository.get(name).getPriceValue() <= moneyUserHave)
+            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
+        return noProductCanPurchase;
+    }
+
+    private boolean isEmptyVendingMachine() {
+        boolean isEmptyVendingMachine = productRepository.keySet()
+            .stream()
+            .allMatch(name -> productRepository.get(name).getQuantityValue() == 0);
+        return isEmptyVendingMachine;
     }
 }
