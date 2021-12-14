@@ -7,6 +7,7 @@ import vendingmachine.domain.ReturnCode;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.util.StringUtils;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     private VendingMachineService vendingMachineService;
@@ -21,6 +22,7 @@ public class VendingMachineController {
         putProductsInVendingMachine();
         putMoneyToBuyProduct();
         buyProductsUntilEnd();
+        vendingMachineService.returnCoins();
     }
 
     private void buyProductsUntilEnd() {
@@ -34,7 +36,7 @@ public class VendingMachineController {
             String productName = InputView.putProductToPurchase();
             returnCode = vendingMachineService.sellProduct(productName);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             buyProduct();
         }
     }
@@ -44,7 +46,7 @@ public class VendingMachineController {
             int inputMoney = StringUtils.convertStringToInt(InputView.putMoneyToBuyProduct());
             vendingMachineService.putMoneyToBuyProduct(new Price(inputMoney));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             putMoneyToBuyProduct();
         }
 
@@ -55,7 +57,7 @@ public class VendingMachineController {
             ArrayList<String> everyProductInfo = StringUtils.splitProducts(InputView.putProductsInVendingMachine());
             vendingMachineService.putProducts(everyProductInfo);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             putProductsInVendingMachine();
         }
     }
@@ -66,7 +68,7 @@ public class VendingMachineController {
             Price price = new Price(inputAccount);
             vendingMachineService.makeCoins(price);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             makeChangeInVendingMachine();
         }
     }

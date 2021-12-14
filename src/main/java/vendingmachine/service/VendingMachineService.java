@@ -73,4 +73,9 @@ public class VendingMachineService {
         OutputView.showUserInsertAmount(userInsertAmount);
         return productRepository.checkPurchaseIsAvailable(userInsertAmount);
     }
+
+    public void returnCoins() {
+        LinkedHashMap<Coin, Integer> coins = coinRepository.returnCoins(userInsertAmount);
+        OutputView.showReturnCoins(coins);
+    }
 }
