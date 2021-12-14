@@ -35,7 +35,7 @@ public class StringUtils {
         if (eachProductInfo.length() - 2 < 1) {
             throw new IllegalArgumentException("상품의 정보가 제대로 입력되지 않았습니다.");
         }
-        return eachProductInfo.substring(1, eachProductInfo.length() - 2);
+        return eachProductInfo.substring(1, eachProductInfo.length() - 1);
     }
 
     public static String[] splitProductInfo(String productInfo) {

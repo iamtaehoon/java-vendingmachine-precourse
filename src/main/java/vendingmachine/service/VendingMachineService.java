@@ -40,10 +40,14 @@ public class VendingMachineService {
             validateOverlapProduct(temp, product);
             temp.put(product.getName(), product);
         }
+        validateEvenOneProduct(temp);
+        return temp;
+    }
+
+    private void validateEvenOneProduct(HashMap<String, Product> temp) {
         if (temp.keySet().stream().mapToInt(productName -> temp.get(productName).getQuantityValue()).sum() == 0) {
             throw new IllegalArgumentException("자판기에는 최소 한 개의 제품이 들어가야 합니다.");
         }
-        return temp;
     }
 
     private void validateOverlapProduct(HashMap<String, Product> temp, Product product) {
