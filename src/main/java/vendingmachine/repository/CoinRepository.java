@@ -10,7 +10,7 @@ public class CoinRepository {
     private LinkedHashMap<Coin, Integer> coinRepository = new LinkedHashMap<>();
 
     public void putCoins(LinkedHashMap<Coin, Integer> coins) {
-        coins.keySet().stream().forEach(coin -> coinRepository.put(coin, coins.get(coin)));
+        coinRepository.putAll(coins);
         OutputView.showCoinsInVendingMachine(this);
     }
 
