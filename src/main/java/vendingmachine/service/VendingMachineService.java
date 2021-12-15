@@ -67,14 +67,17 @@ public class VendingMachineService {
         OutputView.showUserInsertAmount(userInsertAmount);
     }
 
-    public ReturnCode sellProduct(String productName) {
+    public void sellProduct(String productName) {
         userInsertAmount = productRepository.sellProduct(productName,userInsertAmount);
         OutputView.showUserInsertAmount(userInsertAmount);
-        return productRepository.checkPurchaseIsAvailable(userInsertAmount);
     }
 
     public void returnCoins() {
         LinkedHashMap<Coin, Integer> coins = coinRepository.returnCoins(userInsertAmount);
         OutputView.showReturnCoins(coins);
+    }
+
+    public ReturnCode checkPurchaseIsAvailable() {
+        return productRepository.checkPurchaseIsAvailable(userInsertAmount);
     }
 }

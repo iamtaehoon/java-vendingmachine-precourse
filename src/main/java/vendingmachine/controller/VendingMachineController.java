@@ -28,13 +28,14 @@ public class VendingMachineController {
     private void buyProductsUntilEnd() {
         while (returnCode == ReturnCode.CONTINUE) {
             buyProduct();
+            returnCode = vendingMachineService.checkPurchaseIsAvailable();
         }
     }
 
     private void buyProduct() {
         try {
             String productName = InputView.putProductToPurchase();
-            returnCode = vendingMachineService.sellProduct(productName);
+            vendingMachineService.sellProduct(productName);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             buyProduct();
