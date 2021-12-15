@@ -15,10 +15,16 @@ public class CoinRepository {
     }
 
     public void putCoins(LinkedHashMap<Coin, Integer> coins) {
-        for (Coin coin : coins.keySet()) {
-            coinRepository.put(coin, coinRepository.get(coin) + coins.get(coin));
-        }
+        addNewCoin(coins);
         OutputView.showCoinsInVendingMachine(this);
+    }
+
+    private void addNewCoin(LinkedHashMap<Coin, Integer> coins) {
+        for (Coin coin : coins.keySet()) {
+            int coinAlreadyHave = coinRepository.get(coin);
+            int coinNewlyAdd = coins.get(coin);
+            coinRepository.put(coin, coinAlreadyHave + coinNewlyAdd);
+        }
     }
 
     @Override
