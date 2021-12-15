@@ -36,19 +36,18 @@ public class VendingMachineService {
     }
 
     private HashMap<String, Product> makeInputToProduct(ArrayList<String> everyProductInfo) {
-        HashMap<String, Product> temp = new HashMap<>();
+        HashMap<String, Product> tempProductReository = new HashMap<>();
         for (String eachProductInfo : everyProductInfo) {
             eachProductInfo = StringUtils.removeBracket(eachProductInfo);
             Product product = new Product(eachProductInfo);
-            validateOverlapProduct(temp, product);
-            validateOverlapProduct(temp, product);
-            temp.put(product.getName(), product);
+            validateOverlapProduct(tempProductReository, product);
+            tempProductReository.put(product.getName(), product);
         }
-        validateEvenOneProduct(temp);
-        return temp;
+        validateLeastOneProductExist(tempProductReository);
+        return tempProductReository;
     }
 
-    private void validateEvenOneProduct(HashMap<String, Product> temp) {
+    private void validateLeastOneProductExist(HashMap<String, Product> temp) {
         if (temp.keySet().stream().mapToInt(productName -> temp.get(productName).getQuantityValue()).sum() == 0) {
             throw new IllegalArgumentException("자판기에는 최소 한 개의 제품이 들어가야 합니다.");
         }
