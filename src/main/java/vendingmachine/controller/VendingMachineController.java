@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.MoneyStorage;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -13,6 +14,18 @@ public class VendingMachineController {
     public void run() {
         putMoneyByAdmin();
         putProductsByAdmin();
+        putMoneyToBuyProduct();
+        // buyProductUntilEnd(); //투입금액: .... 이거 outputView
+    }
+
+    private void putMoneyToBuyProduct() {
+        try {
+            MoneyStorage moneyStorage = new MoneyStorage(InputView.enterMoneyToBuyProduct());
+            vendingMachineService.saveUserInputMoney(moneyStorage);
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            putMoneyToBuyProduct();
+        }
     }
 
     private void putProductsByAdmin() {
