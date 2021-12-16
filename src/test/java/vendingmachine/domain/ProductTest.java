@@ -18,4 +18,15 @@ class ProductTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 상품_이름_공백_예외() {
+        Assertions.assertThatThrownBy(() -> new Product(" ", "800", "10"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 상품_이름_10글자_초과_예외() {
+        Assertions.assertThatThrownBy(() -> new Product("코카콜라스프라이트음료", "800", "10"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
