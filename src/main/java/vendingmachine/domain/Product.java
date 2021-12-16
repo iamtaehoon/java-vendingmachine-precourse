@@ -46,4 +46,8 @@ public class Product {
     public Quantity getQuantity() {
         return quantity;
     }
+
+    public void sell() {
+        quantity.sell();
+    }
 }

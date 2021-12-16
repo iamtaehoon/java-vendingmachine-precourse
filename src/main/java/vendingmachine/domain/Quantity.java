@@ -31,4 +31,15 @@ public class Quantity implements Comparable<Quantity> {
         }
         throw new IllegalArgumentException("로직 오류");
     }
+
+    public boolean haveStock() {
+        return value > 0;
+    }
+
+    public void sell() {
+        if (!haveStock()) {
+            throw new IllegalArgumentException(NO_STOCK_MESSAGE);
+        }
+        this.value -= 1;
+    }
 }

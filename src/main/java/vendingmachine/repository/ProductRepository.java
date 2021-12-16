@@ -11,6 +11,11 @@ public class ProductRepository {
     private HashMap<String, Product> productRepository = new HashMap<>();
     private Quantity noStock = new Quantity("0");
 
+    public void buyProduct(String productName) {
+        Product product = productRepository.get(productName);
+        product.sell();
+    }
+
     public void addProducts(HashMap<String, Product> products) {
         productRepository.putAll(products);
     }
