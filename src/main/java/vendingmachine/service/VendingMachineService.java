@@ -1,5 +1,7 @@
 package vendingmachine.service;
 
+import static vendingmachine.ErrorMessage.*;
+
 import java.util.HashMap;
 
 import vendingmachine.domain.Money;
@@ -8,7 +10,6 @@ import vendingmachine.domain.Product;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.util.ProductTransformer;
-import vendingmachine.util.StringUtil;
 
 public class VendingMachineService {
     private CoinRepository coinRepository;
@@ -31,7 +32,9 @@ public class VendingMachineService {
     }
 
     public void saveUserInputMoney(MoneyStorage moneyStorage) {
-        productRepository.checkCanBuyProduct(moneyStorage.getMoney());
+        if (!productRepository.canBuyProduct(moneyStorage.getMoney())) {
+            throw new IllegalArgumentException(NO_MONEY_SO_CANT_BUY_MESSAGE);
+        }
         this.moneyStorage = moneyStorage;
         //검증. 이 돈으로 살 수 있는 물건이 있는가. 이건 MoneyStorage의 기능.
 
