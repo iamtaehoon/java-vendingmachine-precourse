@@ -24,6 +24,5 @@ public class CoinRepository {
             System.out.println(coin + ": " + coinRepository.get(coin));
         }
     }
-    //금액이 들어오면 -> 동전을 만들어서 넣어준다. / 잘못된 금액인 경우 service 단계에서 잘라준다.
-
+    
 }
