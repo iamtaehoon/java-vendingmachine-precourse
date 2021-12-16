@@ -8,16 +8,17 @@ import vendingmachine.domain.Quantity;
 
 public class ProductRepository {
     private HashMap<String, Product> productRepository = new HashMap<>();
+    private Quantity noStock = new Quantity("0");
 
     public void addProducts(HashMap<String, Product> products) {
         productRepository.putAll(products);
     }
 
-    public void checkCanBuyProduct(Money inputAmount) {
-        productRepository.keySet()
+    public boolean checkCanBuyProduct(Money inputAmount) { // 살 수 있는 물건이 있으면 true, 없으면 else
+        return productRepository.keySet()
             .stream()
-            .filter(productName -> getPrice(productName) <= inputAmount)
-            .anyMatch(productName -> productRepository.get(productName).getQuantity() > new Quantity(0));
+            .filter(productName -> inputAmount.compareTo(getPrice(productName)) != -1) //입력값이 크거나 같다. 이거 메서드로 뽑아내야함.
+            .anyMatch(productName -> noStock.compareTo(productRepository.get(productName).getQuantity()) == 1);
     }
 
     private Money getPrice(String productName) {

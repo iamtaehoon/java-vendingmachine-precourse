@@ -5,7 +5,7 @@ import static vendingmachine.ErrorMessage.*;
 
 import vendingmachine.util.StringUtil;
 
-public class Money {
+public class Money implements Comparable<Money> {
     private int value;
 
     public Money(String input) {
@@ -22,5 +22,17 @@ public class Money {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public int compareTo(Money o) {
+        if (this.value > o.getValue()) {
+            return 1;
+        } else if (this.value == o.getValue()) {
+            return 0;
+        } else if (this.value < o.getValue()) {
+            return -1;
+        }
+        throw new IllegalArgumentException("로직 오류");
     }
 }
