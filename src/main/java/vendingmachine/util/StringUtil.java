@@ -14,4 +14,5 @@ public class StringUtil {
         name = name.trim();
         return name.isEmpty();
     }
+
 }
