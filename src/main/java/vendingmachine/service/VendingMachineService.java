@@ -28,7 +28,6 @@ public class VendingMachineService {
 
     public void putProductsByAdmin(String productInfoNotProcessing) {
         HashMap<String, Product> productsInfo = ProductTransformer.preProcessing(productInfoNotProcessing);
-        //productsInfo에 재고가 있냐?, //productRepository에 재고가 있냐?
         if (haveNoStock(productsInfo) & productRepository.isEmpty()) {
             throw new IllegalArgumentException(NO_STOCK_MESSAGE);
         }
@@ -50,7 +49,6 @@ public class VendingMachineService {
     }
 
     public MoneyStorage buyProduct(String productName) {
-        // 이 녀석이 실제로 있는 녀석인가 검사.
         if (!productRepository.hasProduct(productName)) {
             throw new IllegalArgumentException(PRODUCT_NAME_EMPTY_ERROR);
         }
