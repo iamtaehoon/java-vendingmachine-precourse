@@ -9,4 +9,9 @@ public class StringUtil {
         }
         return Integer.parseInt(input);
     }
+
+    public static boolean isEmpty(String name) {
+        name = name.trim();
+        return name.isEmpty();
+    }
 }

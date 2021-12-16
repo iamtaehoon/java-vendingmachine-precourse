@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.util.StringUtil;
+
 public class Product {
     private String name;
     private Money price;
@@ -26,7 +28,7 @@ public class Product {
     }
 
     private static void validateName(String name) {
-        if (name.isEmpty()) {
+        if (StringUtil.isEmpty(name)) {
             throw new IllegalArgumentException("상품의 이름이 존재하지 않습니다.");
         }
         if (name.length() > 10) {
