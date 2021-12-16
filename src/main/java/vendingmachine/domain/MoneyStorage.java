@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.ErrorMessage.*;
+
 public class MoneyStorage {
     private Money money;
 
@@ -11,4 +13,12 @@ public class MoneyStorage {
         return money;
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(money.getValue());
+    }
+
+    public void use(Money usedMoney) {
+        money.minus(usedMoney);
+    }
 }

@@ -15,13 +15,31 @@ public class VendingMachineController {
         putMoneyByAdmin();
         putProductsByAdmin();
         putMoneyToBuyProduct();
-        // buyProductUntilEnd(); //투입금액: .... 이거 outputView
+        buyProductUntilEnd(); //투입금액: .... 이거 outputView
+    }
+
+    private void buyProductUntilEnd() {
+        while (true) {
+            buyProduct();
+        }
+    }
+
+    private void buyProduct() {
+        try {
+            MoneyStorage moneyStorage = vendingMachineService.buyProduct(InputView.enterBuyingProductName());
+            OutputView.showRemainingAmount(moneyStorage);
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            buyProduct();
+        }
     }
 
     private void putMoneyToBuyProduct() {
         try {
             MoneyStorage moneyStorage = new MoneyStorage(InputView.enterMoneyToBuyProduct());
             vendingMachineService.saveUserInputMoney(moneyStorage);
+            // 투입 금액 3000원
+            OutputView.showRemainingAmount(moneyStorage);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             putMoneyToBuyProduct();

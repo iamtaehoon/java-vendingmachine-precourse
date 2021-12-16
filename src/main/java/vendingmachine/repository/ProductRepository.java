@@ -11,9 +11,10 @@ public class ProductRepository {
     private HashMap<String, Product> productRepository = new HashMap<>();
     private Quantity noStock = new Quantity("0");
 
-    public void buyProduct(String productName) {
+    public Money buyProduct(String productName) {
         Product product = productRepository.get(productName);
         product.sell();
+        return product.getPrice();
     }
 
     public void addProducts(HashMap<String, Product> products) {
@@ -41,5 +42,9 @@ public class ProductRepository {
 
     private Money getPrice(String productName) {
         return productRepository.get(productName).getPrice();
+    }
+
+    public boolean hasProduct(String findProductName) {
+        return productRepository.containsKey(findProductName);
     }
 }

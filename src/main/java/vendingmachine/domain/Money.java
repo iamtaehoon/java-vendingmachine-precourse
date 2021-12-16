@@ -35,4 +35,11 @@ public class Money implements Comparable<Money> {
         }
         throw new IllegalArgumentException("로직 오류");
     }
+
+    public void minus(Money usedMoney) {
+        if (value < usedMoney.getValue()) {
+            throw new IllegalArgumentException(MONEY_LACK_MESSAGE);
+        }
+        value -= usedMoney.getValue();
+    }
 }

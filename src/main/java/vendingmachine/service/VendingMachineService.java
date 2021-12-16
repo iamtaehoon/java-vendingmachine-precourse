@@ -37,6 +37,15 @@ public class VendingMachineService {
         }
         this.moneyStorage = moneyStorage;
         //검증. 이 돈으로 살 수 있는 물건이 있는가. 이건 MoneyStorage의 기능.
+    }
 
+    public MoneyStorage buyProduct(String productName) {
+        // 이 녀석이 실제로 있는 녀석인가 검사.
+        if (!productRepository.hasProduct(productName)) {
+            throw new IllegalArgumentException(PRODUCT_NAME_EMPTY_ERROR);
+        }
+        Money usedMoney = productRepository.buyProduct(productName);
+        moneyStorage.use(usedMoney);
+        return moneyStorage;
     }
 }

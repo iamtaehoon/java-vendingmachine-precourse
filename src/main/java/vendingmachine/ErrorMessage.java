@@ -14,4 +14,5 @@ public abstract class ErrorMessage {
 
     public static String NO_MONEY_SO_CANT_BUY_MESSAGE = "이 금액으로는 살 수 있는 물건이 존재하지 않습니다.";
     public static String NO_STOCK_MESSAGE = "재고가 존재하지 않습니다.";
+    public static String MONEY_LACK_MESSAGE = "금액이 부족합니다.";
 }
