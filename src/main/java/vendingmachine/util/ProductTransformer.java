@@ -1,5 +1,8 @@
 package vendingmachine.util;
 
+import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
+
 import java.util.HashMap;
 
 import vendingmachine.domain.Product;
@@ -7,28 +10,37 @@ import vendingmachine.domain.Product;
 public class ProductTransformer {
     public static HashMap<String, Product> preProcessing(String data) {
         HashMap<String, Product> temp = new HashMap<>();
-        String[] everyProductInfoNotPreProcessing = data.split(";", -1);
+        String[] everyProductInfoNotPreProcessing = data.split(PRODUCT_INFO_DELIMETER, -1);
         for (String eachProductInfoNotPreProcessing : everyProductInfoNotPreProcessing) {
             validate(eachProductInfoNotPreProcessing);
-            String eachProductInfoRemovePackaging = eachProductInfoNotPreProcessing.substring(1,
-                eachProductInfoNotPreProcessing.length() - 1);
-            String[] eachProductDetails = eachProductInfoRemovePackaging.split(",", -1);
-            if (eachProductDetails.length != 3) {
-                throw new IllegalArgumentException("상품 정보를 제대로 입력하세요.");
-            }
-            temp.put(eachProductDetails[0],
-                new Product(eachProductDetails[0], eachProductDetails[1], eachProductDetails[2]));
+            String eachProductInfoRemoveBracket = removeBracket(eachProductInfoNotPreProcessing);
+            String[] eachProductDetails = eachProductInfoRemoveBracket.split(PRODUCT_DETAIL_DELIMETER, -1);
+            validateDetailsCnt(eachProductDetails);
+            temp.put(eachProductDetails[PRODUCT_NAME_IDX],
+                new Product(eachProductDetails[PRODUCT_NAME_IDX], eachProductDetails[PRODUCT_PRICE_IDX], eachProductDetails[PRODUCT_QUANTITY_IDX]));
         }
         return temp;
     }
 
+    private static void validateDetailsCnt(String[] eachProductDetails) {
+        if (eachProductDetails.length != PRODUCT_DETAIL_CNT) {
+            throw new IllegalArgumentException(INVALID_PRODUCT_INFO_MESSAGE);
+        }
+    }
+
+    private static String removeBracket(String eachProductInfoNotPreProcessing) {
+        String eachProductInfoRemovePackaging = eachProductInfoNotPreProcessing.substring(1,
+            eachProductInfoNotPreProcessing.length() - 1);
+        return eachProductInfoRemovePackaging;
+    }
+
     private static void validate(String eachProductInfoNotPreProcessing) {
         if (eachProductInfoNotPreProcessing.length() < 2) {
-            throw new IllegalArgumentException("상품 정보를 제대로 입력하세요.");
+            throw new IllegalArgumentException(INVALID_PRODUCT_INFO_MESSAGE);
         }
-        if (!(eachProductInfoNotPreProcessing.charAt(0) == '['
-            & eachProductInfoNotPreProcessing.charAt(eachProductInfoNotPreProcessing.length()-1) == ']')) {
-            throw new IllegalArgumentException("각 상품은 [ 와 ] 로 포장되어야 합니다.");
+        if (!(eachProductInfoNotPreProcessing.charAt(0) == LEFT_BRACKET
+            & eachProductInfoNotPreProcessing.charAt(eachProductInfoNotPreProcessing.length()-1) == RIGHT_BRACKET)) {
+            throw new IllegalArgumentException(NOT_PACKAGING_MESSAGE);
         }
     }
 }
