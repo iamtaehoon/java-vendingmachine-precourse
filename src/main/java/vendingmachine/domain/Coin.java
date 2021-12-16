@@ -25,5 +25,9 @@ public enum Coin {
         return amount;
     }
 
+    @Override
+    public String toString() {
+        return amount + "원";
+    }
     // 추가 기능 구현
 }

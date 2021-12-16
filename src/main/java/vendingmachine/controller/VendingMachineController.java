@@ -1,5 +1,8 @@
 package vendingmachine.controller;
 
+import java.util.LinkedHashMap;
+
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.MoneyStorage;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
@@ -15,7 +18,9 @@ public class VendingMachineController {
         putMoneyByAdmin();
         putProductsByAdmin();
         putMoneyToBuyProduct();
-        buyProductUntilEnd(); //투입금액: .... 이거 outputView
+        buyProductUntilEnd();
+        LinkedHashMap<Coin, Integer> change = vendingMachineService.giveChange();
+        OutputView.showChange(change);
     }
 
     private void buyProductUntilEnd() {

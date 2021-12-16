@@ -3,7 +3,9 @@ package vendingmachine.service;
 import static vendingmachine.ErrorMessage.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.MoneyStorage;
 import vendingmachine.domain.Product;
@@ -59,5 +61,9 @@ public class VendingMachineService {
 
     public boolean canBuyProduct() {
         return productRepository.canBuyProduct(moneyStorage.getMoney());
+    }
+
+    public LinkedHashMap<Coin, Integer> giveChange() {
+        return coinRepository.giveChange(moneyStorage);
     }
 }

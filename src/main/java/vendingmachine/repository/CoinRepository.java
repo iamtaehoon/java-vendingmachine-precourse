@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.MoneyStorage;
 import vendingmachine.util.CoinGenerator;
 
 public class CoinRepository {
@@ -25,4 +26,22 @@ public class CoinRepository {
         }
     }
 
+    public LinkedHashMap<Coin, Integer> giveChange(MoneyStorage moneyStorage) {
+        LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
+        int remainingMoneyValue = moneyStorage.getMoney().getValue();
+        // 비싼거부터 하나씩 꺼낸다.
+        for (Coin coin : Coin.values()) {
+            int giveCnt = remainingMoneyValue / coin.getAmount();
+            int haveCnt = coinRepository.get(coin);
+            if (haveCnt < giveCnt) {
+                giveCnt = haveCnt;
+            }
+            if (giveCnt == 0) {
+                continue;
+            }
+            coins.put(coin, giveCnt);
+            remainingMoneyValue -= coin.getAmount() * giveCnt;
+        }
+        return coins;
+    }
 }
