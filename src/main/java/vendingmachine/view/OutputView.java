@@ -11,12 +11,16 @@ public class OutputView {
     }
 
     public static void showRemainingAmount(MoneyStorage moneyStorage) {
-        System.out.println("\n투입 금액: " + moneyStorage);
+        System.out.println("\n투입 금액: " + moneyStorage+"원");
     }
 
     public static void showChange(LinkedHashMap<Coin, Integer> change) {
         for (Coin coin : change.keySet()) {
             System.out.println(coin + " - " + change.get(coin) + "개");
         }
+    }
+
+    public static void showVendingMachineHaveCoinMessage() {
+        System.out.println("자판기가 보유한 동전");
     }
 }
