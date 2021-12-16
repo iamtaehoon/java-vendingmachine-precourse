@@ -16,7 +16,7 @@ public class OutputView {
 
     public static void showChange(LinkedHashMap<Coin, Integer> change) {
         for (Coin coin : change.keySet()) {
-            System.out.println(coin + " - " + change.get(coin) + " 개");
+            System.out.println(coin + " - " + change.get(coin) + "개");
         }
     }
 }

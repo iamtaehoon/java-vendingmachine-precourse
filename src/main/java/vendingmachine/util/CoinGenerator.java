@@ -2,15 +2,16 @@ package vendingmachine.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
 
 public class CoinGenerator {
-    static HashMap<Coin, Integer> coins = new HashMap<>();
+    static LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 
-    public static HashMap<Coin,Integer> makeCoins(Money money) {
+    public static LinkedHashMap<Coin,Integer> makeCoins(Money money) {
 
         int moneyValue = initialize(money);
         while (moneyValue != 0) {

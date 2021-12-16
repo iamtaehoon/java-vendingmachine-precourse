@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
@@ -61,7 +62,9 @@ public class VendingMachineController {
 
     private void putMoneyByAdmin() {
         try {
-            vendingMachineService.putMoneyByAdmin(InputView.enterMoneyVendingMachineHave());
+            LinkedHashMap<Coin, Integer> coins = vendingMachineService.putMoneyByAdmin(
+                InputView.enterMoneyVendingMachineHave());
+            OutputView.showChange(coins);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             putMoneyByAdmin();

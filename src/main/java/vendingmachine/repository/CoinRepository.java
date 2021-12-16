@@ -17,13 +17,11 @@ public class CoinRepository {
         Arrays.stream(Coin.values()).forEach(coin -> coinRepository.put(coin, 0));
     }
 
-    public void putCoinInVendingMachine(Money moneyVendingMachineHave) {
-        HashMap<Coin, Integer> coins = CoinGenerator.makeCoins(moneyVendingMachineHave);
+    public LinkedHashMap<Coin, Integer> putCoinInVendingMachine(Money moneyVendingMachineHave) {
+        LinkedHashMap<Coin, Integer> coins = CoinGenerator.makeCoins(moneyVendingMachineHave);
         Arrays.stream(Coin.values())
             .forEach(coin -> coinRepository.put(coin, coinRepository.get(coin) + coins.get(coin)));
-        for (Coin coin : coinRepository.keySet()) {
-            System.out.println(coin + ": " + coinRepository.get(coin));
-        }
+        return coins;
     }
 
     public LinkedHashMap<Coin, Integer> giveChange(MoneyStorage moneyStorage) {

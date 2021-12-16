@@ -23,9 +23,9 @@ public class VendingMachineService {
         this.productRepository = productRepository;
     }
 
-    public void putMoneyByAdmin(String moneyInput) {
+    public LinkedHashMap<Coin, Integer> putMoneyByAdmin(String moneyInput) {
         Money moneyVendingMachineHave = new Money(moneyInput);
-        coinRepository.putCoinInVendingMachine(moneyVendingMachineHave);
+        return coinRepository.putCoinInVendingMachine(moneyVendingMachineHave);
     }
 
     public void putProductsByAdmin(String productInfoNotProcessing) {
