@@ -11,7 +11,6 @@ public class VendingMachineController {
     }
 
     public void run() {
-        //관리자는 자판기에 금액을 넣는다.
         putMoneyByAdmin();
     }
 
@@ -19,8 +18,7 @@ public class VendingMachineController {
         try {
             vendingMachineService.putMoneyByAdmin(InputView.enterMoneyVendingMachineHave());
         } catch (IllegalArgumentException e) {
-            // OutputView.showErrorMessage(e);
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             putMoneyByAdmin();
         }
     }

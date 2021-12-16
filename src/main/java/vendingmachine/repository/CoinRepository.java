@@ -24,5 +24,5 @@ public class CoinRepository {
             System.out.println(coin + ": " + coinRepository.get(coin));
         }
     }
-    
+
 }
