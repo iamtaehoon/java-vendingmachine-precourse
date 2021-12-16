@@ -12,6 +12,16 @@ public class VendingMachineController {
 
     public void run() {
         putMoneyByAdmin();
+        putProductsByAdmin();
+    }
+
+    private void putProductsByAdmin() {
+        try {
+            vendingMachineService.putProductsByAdmin(InputView.enterProductsPutInVendingMachine());
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            putProductsByAdmin();
+        }
     }
 
     private void putMoneyByAdmin() {
