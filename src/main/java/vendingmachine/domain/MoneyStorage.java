@@ -10,4 +10,5 @@ public class MoneyStorage {
     public Money getMoney() {
         return money;
     }
+
 }

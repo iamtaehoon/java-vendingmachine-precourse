@@ -31,6 +31,7 @@ public class VendingMachineService {
     }
 
     public void saveUserInputMoney(MoneyStorage moneyStorage) {
+        productRepository.checkCanBuyProduct(moneyStorage.getMoney());
         this.moneyStorage = moneyStorage;
         //검증. 이 돈으로 살 수 있는 물건이 있는가. 이건 MoneyStorage의 기능.
 

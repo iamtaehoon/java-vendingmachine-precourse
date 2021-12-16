@@ -38,4 +38,12 @@ public class Product {
             throw new IllegalArgumentException(PRODUCT_NAME_TOO_LONG_ERROR);
         }
     }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
 }
