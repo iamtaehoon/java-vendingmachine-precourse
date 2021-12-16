@@ -19,7 +19,7 @@ public class VendingMachineController {
     }
 
     private void buyProductUntilEnd() {
-        while (true) {
+        while (vendingMachineService.canBuyProduct()) {
             buyProduct();
         }
     }

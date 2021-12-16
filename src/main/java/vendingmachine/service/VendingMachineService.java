@@ -48,4 +48,8 @@ public class VendingMachineService {
         moneyStorage.use(usedMoney);
         return moneyStorage;
     }
+
+    public boolean canBuyProduct() {
+        return productRepository.canBuyProduct(moneyStorage.getMoney());
+    }
 }
