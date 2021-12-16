@@ -9,13 +9,13 @@ class ProductTest {
 
     @Test
     void 상품_생성_정상() {
-        // Product product = Product.putVendingMachine("코카콜라", new Money("1000"), new Quantity("10"));
+        Product product = new Product("코카콜라", "1000", "10");
     }
 
     @Test
     void 상품_가격_100원_미만_예외() {
-        // Assertions.assertThatThrownBy(() -> Product.putVendingMachine("코카콜라", new Money("80"), new Quantity("10")))
-        //     .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> new Product("코카콜라", "80", "10"))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
