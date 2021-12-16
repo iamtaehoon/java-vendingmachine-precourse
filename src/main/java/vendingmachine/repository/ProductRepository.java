@@ -47,4 +47,11 @@ public class ProductRepository {
     public boolean hasProduct(String findProductName) {
         return productRepository.containsKey(findProductName);
     }
+
+    public boolean isEmpty() {
+        return productRepository.keySet()
+            .stream()
+            .mapToInt(productName -> productRepository.get(productName).getQuantity().getValue())
+            .sum() == 0;
+    }
 }

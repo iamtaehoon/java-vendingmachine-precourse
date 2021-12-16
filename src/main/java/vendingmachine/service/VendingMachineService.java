@@ -28,7 +28,18 @@ public class VendingMachineService {
 
     public void putProductsByAdmin(String productInfoNotProcessing) {
         HashMap<String, Product> productsInfo = ProductTransformer.preProcessing(productInfoNotProcessing);
+        //productsInfo에 재고가 있냐?, //productRepository에 재고가 있냐?
+        if (haveNoStock(productsInfo) & productRepository.isEmpty()) {
+            throw new IllegalArgumentException(NO_STOCK_MESSAGE);
+        }
         productRepository.addProducts(productsInfo);
+    }
+
+    private boolean haveNoStock(HashMap<String, Product> productsInfo) {
+        return productsInfo.keySet()
+            .stream()
+            .mapToInt(productName -> productsInfo.get(productName).getQuantity().getValue())
+            .sum() == 0;
     }
 
     public void saveUserInputMoney(MoneyStorage moneyStorage) {
@@ -36,7 +47,6 @@ public class VendingMachineService {
             throw new IllegalArgumentException(NO_MONEY_SO_CANT_BUY_MESSAGE);
         }
         this.moneyStorage = moneyStorage;
-        //검증. 이 돈으로 살 수 있는 물건이 있는가. 이건 MoneyStorage의 기능.
     }
 
     public MoneyStorage buyProduct(String productName) {

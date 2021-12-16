@@ -38,7 +38,6 @@ public class VendingMachineController {
         try {
             MoneyStorage moneyStorage = new MoneyStorage(InputView.enterMoneyToBuyProduct());
             vendingMachineService.saveUserInputMoney(moneyStorage);
-            // 투입 금액 3000원
             OutputView.showRemainingAmount(moneyStorage);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
