@@ -1,5 +1,8 @@
 package vendingmachine.domain;
 
+import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
+
 import vendingmachine.util.StringUtil;
 
 public class Product {
@@ -22,17 +25,17 @@ public class Product {
     }
 
     private static void validatePrice(Money price) {
-        if (price.getValue() < 100) {
-            throw new IllegalArgumentException("상품의 가격은 100원 이상이어야 합니다.");
+        if (price.getValue() < PRODUCT_PRICE_MIN_VALUE) {
+            throw new IllegalArgumentException(PRODUCT_PRICE_LESS_ERROR);
         }
     }
 
     private static void validateName(String name) {
         if (StringUtil.isEmpty(name)) {
-            throw new IllegalArgumentException("상품의 이름이 존재하지 않습니다.");
+            throw new IllegalArgumentException(PRODUCT_NAME_EMPTY_ERROR);
         }
-        if (name.length() > 10) {
-            throw new IllegalArgumentException("상품의 이름이 너무 깁니다.");
+        if (name.length() > PRODUCT_NAME_MAX_SIZE) {
+            throw new IllegalArgumentException(PRODUCT_NAME_TOO_LONG_ERROR);
         }
     }
 }

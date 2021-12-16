@@ -4,4 +4,8 @@ public abstract class ErrorMessage {
     public static String MONEY_NOT_POSITIVE_ERROR = "금액은 음수가 될 수 없습니다.";
     public static String QUANTITY_NOT_POSITIVE_ERROR = "재고는 0보다 작을 수 없습니다.";
     public static String MONEY_UNIT_ERROR = "금액은 10으로 나누어 떨어져야 합니다.";
+
+    public static String PRODUCT_PRICE_LESS_ERROR = "상품의 가격은 100원 이상이어야 합니다.";
+    public static String PRODUCT_NAME_EMPTY_ERROR = "상품의 이름이 존재하지 않습니다.";
+    public static String PRODUCT_NAME_TOO_LONG_ERROR = "상품의 이름이 너무 깁니다.";
 }
