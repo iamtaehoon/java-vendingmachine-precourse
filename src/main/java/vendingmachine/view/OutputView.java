@@ -3,15 +3,15 @@ package vendingmachine.view;
 import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.MoneyStorage;
+import vendingmachine.domain.Money;
 
 public class OutputView {
     public static void showErrorMessage(IllegalArgumentException e) {
         System.out.println("[ERROR] " + e.getMessage());
     }
 
-    public static void showRemainingAmount(MoneyStorage moneyStorage) {
-        System.out.println("\n투입 금액: " + moneyStorage+"원");
+    public static void showRemainingAmount(Money remainingMoney) {
+        System.out.println("\n투입 금액: " + remainingMoney+"원");
     }
 
     public static void showChange(LinkedHashMap<Coin, Integer> change) {

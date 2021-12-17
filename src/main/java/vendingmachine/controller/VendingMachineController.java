@@ -1,16 +1,16 @@
 package vendingmachine.controller;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.MoneyStorage;
+import vendingmachine.domain.Money;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     private VendingMachineService vendingMachineService;
+    
     public VendingMachineController(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
     }
@@ -44,8 +44,8 @@ public class VendingMachineController {
 
     private void buyProduct() {
         try {
-            MoneyStorage moneyStorage = vendingMachineService.buyProduct(InputView.enterBuyingProductName());
-            OutputView.showRemainingAmount(moneyStorage);
+            Money remainingMoney = vendingMachineService.buyProduct(InputView.enterBuyingProductName());
+            OutputView.showRemainingAmount(remainingMoney);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             buyProduct();
@@ -54,9 +54,9 @@ public class VendingMachineController {
 
     private void putMoneyToBuyProduct() {
         try {
-            MoneyStorage moneyStorage = new MoneyStorage(InputView.enterMoneyToBuyProduct());
-            vendingMachineService.saveUserInputMoney(moneyStorage);
-            OutputView.showRemainingAmount(moneyStorage);
+            Money inputMoney = new Money(InputView.enterMoneyToBuyProduct());
+            vendingMachineService.saveUserInputMoney(inputMoney);
+            OutputView.showRemainingAmount(inputMoney);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             putMoneyToBuyProduct();

@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.MoneyStorage;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
@@ -16,7 +15,7 @@ import vendingmachine.util.ProductTransformer;
 public class VendingMachineService {
     private CoinRepository coinRepository;
     private ProductRepository productRepository;
-    private MoneyStorage moneyStorage;
+    private Money remainingMoney;
 
     public VendingMachineService(CoinRepository coinRepository, ProductRepository productRepository) {
         this.coinRepository = coinRepository;
@@ -43,27 +42,27 @@ public class VendingMachineService {
             .sum() == 0;
     }
 
-    public void saveUserInputMoney(MoneyStorage moneyStorage) {
-        if (!productRepository.canBuyProduct(moneyStorage.getMoney())) {
+    public void saveUserInputMoney(Money inputMoney) {
+        if (!productRepository.canBuyProduct(inputMoney)) {
             throw new IllegalArgumentException(NO_MONEY_SO_CANT_BUY_MESSAGE);
         }
-        this.moneyStorage = moneyStorage;
+        this.remainingMoney = inputMoney;
     }
 
-    public MoneyStorage buyProduct(String productName) {
+    public Money buyProduct(String productName) {
         if (!productRepository.hasProduct(productName)) {
             throw new IllegalArgumentException(PRODUCT_NAME_EMPTY_ERROR);
         }
         Money usedMoney = productRepository.buyProduct(productName);
-        moneyStorage.use(usedMoney);
-        return moneyStorage;
+        remainingMoney.minus(usedMoney);
+        return remainingMoney;
     }
 
     public boolean canBuyProduct() {
-        return productRepository.canBuyProduct(moneyStorage.getMoney());
+        return productRepository.canBuyProduct(remainingMoney);
     }
 
     public LinkedHashMap<Coin, Integer> giveChange() {
-        return coinRepository.giveChange(moneyStorage);
+        return coinRepository.giveChange(remainingMoney);
     }
 }

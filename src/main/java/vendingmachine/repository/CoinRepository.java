@@ -1,12 +1,10 @@
 package vendingmachine.repository;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.MoneyStorage;
 import vendingmachine.util.CoinGenerator;
 
 public class CoinRepository {
@@ -24,9 +22,9 @@ public class CoinRepository {
         return coins;
     }
 
-    public LinkedHashMap<Coin, Integer> giveChange(MoneyStorage moneyStorage) {
+    public LinkedHashMap<Coin, Integer> giveChange(Money remainingAmount) {
         LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
-        int remainingMoneyValue = moneyStorage.getMoney().getValue();
+        int remainingMoneyValue = remainingAmount.getValue();
         // 비싼거부터 하나씩 꺼낸다.
         for (Coin coin : Coin.values()) {
             int giveCnt = remainingMoneyValue / coin.getAmount();

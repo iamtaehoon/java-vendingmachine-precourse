@@ -42,4 +42,9 @@ public class Money implements Comparable<Money> {
         }
         value -= usedMoney.getValue();
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
 }
