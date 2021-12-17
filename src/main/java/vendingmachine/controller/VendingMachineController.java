@@ -16,12 +16,24 @@ public class VendingMachineController {
     }
 
     public void run() {
-        putMoneyByAdmin();
-        putProductsByAdmin();
-        putMoneyToBuyProduct();
-        buyProductUntilEnd();
+        initializeVendingMachine();
+        useVendingMachine();
+        giveChange();
+    }
+
+    private void giveChange() {
         LinkedHashMap<Coin, Integer> change = vendingMachineService.giveChange();
         OutputView.showChange(change);
+    }
+
+    private void useVendingMachine() {
+        putMoneyToBuyProduct();
+        buyProductUntilEnd();
+    }
+
+    private void initializeVendingMachine() {
+        putMoneyByAdmin();
+        putProductsByAdmin();
     }
 
     private void buyProductUntilEnd() {
