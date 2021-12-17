@@ -10,7 +10,7 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     private VendingMachineService vendingMachineService;
-    
+
     public VendingMachineController(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
     }
@@ -74,8 +74,8 @@ public class VendingMachineController {
 
     private void putMoneyByAdmin() {
         try {
-            LinkedHashMap<Coin, Integer> coins = vendingMachineService.putMoneyByAdmin(
-                InputView.enterMoneyVendingMachineHave());
+            String money = InputView.enterMoneyVendingMachineHave();
+            LinkedHashMap<Coin, Integer> coins = vendingMachineService.putMoneyByAdmin(money);
             OutputView.showVendingMachineHaveCoin(coins);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);

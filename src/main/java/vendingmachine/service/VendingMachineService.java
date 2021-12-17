@@ -29,7 +29,7 @@ public class VendingMachineService {
 
     public void putProductsByAdmin(String productInfoNotProcessing) {
         HashMap<String, Product> productsInfo = ProductTransformer.preProcessing(productInfoNotProcessing);
-        if (haveNoStock(productsInfo) & productRepository.isEmpty()) {
+        if (haveNoStock(productsInfo) & productRepository.haveNoStock()) {
             throw new IllegalArgumentException(NO_STOCK_MESSAGE);
         }
         productRepository.addProducts(productsInfo);

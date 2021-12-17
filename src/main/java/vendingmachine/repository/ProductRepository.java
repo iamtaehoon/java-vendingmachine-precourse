@@ -48,7 +48,7 @@ public class ProductRepository {
         return productRepository.containsKey(findProductName);
     }
 
-    public boolean isEmpty() {
+    public boolean haveNoStock() {
         return productRepository.keySet()
             .stream()
             .mapToInt(productName -> productRepository.get(productName).getQuantity().getValue())
