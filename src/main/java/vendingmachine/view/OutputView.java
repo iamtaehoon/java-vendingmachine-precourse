@@ -20,7 +20,9 @@ public class OutputView {
         }
     }
 
-    public static void showVendingMachineHaveCoinMessage() {
+    public static void showVendingMachineHaveCoin(LinkedHashMap<Coin, Integer> coins) {
         System.out.println("자판기가 보유한 동전");
+        OutputView.showChange(coins);
+
     }
 }

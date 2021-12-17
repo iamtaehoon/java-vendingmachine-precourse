@@ -76,8 +76,7 @@ public class VendingMachineController {
         try {
             LinkedHashMap<Coin, Integer> coins = vendingMachineService.putMoneyByAdmin(
                 InputView.enterMoneyVendingMachineHave());
-            OutputView.showVendingMachineHaveCoinMessage();
-            OutputView.showChange(coins);
+            OutputView.showVendingMachineHaveCoin(coins);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             putMoneyByAdmin();
