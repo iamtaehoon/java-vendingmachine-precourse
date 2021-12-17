@@ -8,18 +8,22 @@ import java.util.HashMap;
 import vendingmachine.domain.Product;
 
 public class ProductTransformer {
-    public static HashMap<String, Product> preProcessing(String data) {
+    public static HashMap<String, Product> makeProducts(String data) {
         HashMap<String, Product> temp = new HashMap<>();
         String[] everyProductInfoNotPreProcessing = data.split(PRODUCT_INFO_DELIMETER, -1);
         for (String eachProductInfoNotPreProcessing : everyProductInfoNotPreProcessing) {
-            validate(eachProductInfoNotPreProcessing);
-            String eachProductInfoRemoveBracket = removeBracket(eachProductInfoNotPreProcessing);
-            String[] eachProductDetails = eachProductInfoRemoveBracket.split(PRODUCT_DETAIL_DELIMETER, -1);
-            validateDetailsCnt(eachProductDetails);
-            temp.put(eachProductDetails[PRODUCT_NAME_IDX],
-                new Product(eachProductDetails[PRODUCT_NAME_IDX], eachProductDetails[PRODUCT_PRICE_IDX], eachProductDetails[PRODUCT_QUANTITY_IDX]));
+            Product product = preprocess(eachProductInfoNotPreProcessing);
+            temp.put(product.getName(), product);
         }
         return temp;
+    }
+
+    private static Product preprocess(String eachProductInfoNotPreProcessing) {
+        validate(eachProductInfoNotPreProcessing);
+        String eachProductInfoRemoveBracket = removeBracket(eachProductInfoNotPreProcessing);
+        String[] eachProductDetails = eachProductInfoRemoveBracket.split(PRODUCT_DETAIL_DELIMETER, -1);
+        validateDetailsCnt(eachProductDetails);
+        return new Product(eachProductDetails[PRODUCT_NAME_IDX], eachProductDetails[PRODUCT_PRICE_IDX], eachProductDetails[PRODUCT_QUANTITY_IDX]);
     }
 
     private static void validateDetailsCnt(String[] eachProductDetails) {

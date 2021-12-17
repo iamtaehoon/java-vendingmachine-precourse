@@ -47,7 +47,12 @@ public class Product {
         return quantity;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void sell() {
         quantity.sell();
     }
+
 }
